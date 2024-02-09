@@ -14,32 +14,40 @@ kotlin {
             }
         }
     }
-    
+
     sourceSets {
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.androidx.lifecycle.viewmodel.compose)
             implementation(libs.androidx.lifecycle.viewmodel.ktx)
+            implementation(libs.androidx.material)
+            implementation(libs.coil.compose)
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.okhttp)
             implementation(libs.ktor.serialization.kotlinx.json)
         }
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            implementation(compose.ui)
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
+            implementation(compose.foundation)
+            implementation(compose.material)
+            implementation(compose.runtime)
+            implementation(compose.ui)
+            implementation(projects.articles)
+            implementation(projects.core.ext)
+            implementation(projects.core.network)
             implementation(projects.shared)
         }
     }
 }
 
 android {
-    namespace = "org.example.project"
+    namespace = "com.emerson.sample.news"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")

@@ -1,4 +1,4 @@
-rootProject.name = "KotlinProject"
+rootProject.name = "SampleNews"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -18,5 +18,10 @@ dependencyResolutionManagement {
     }
 }
 
-include(":composeApp")
-include(":shared")
+include(
+    ":androidApp",
+    ":articles",
+    ":core:ext",
+    ":core:network",
+    ":shared",
+)
