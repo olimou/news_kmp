@@ -45,7 +45,7 @@ class ArticleRepositoryTest {
         coEvery { mapArticlePayload.map(any()) } returns articleModel
 
         runTest {
-            val articles = articleRepository.getArticles()
+            val articles = articleRepository.getTopHeadlines()
             assertEquals(listOf(articleModel), articles)
         }
 
@@ -64,7 +64,7 @@ class ArticleRepositoryTest {
 
         runTest {
             runCatching {
-                articleRepository.getArticles()
+                articleRepository.getTopHeadlines()
             }.exceptionOrNull()
                 .also { assertEquals("Error fetching articles", it?.message) }
 

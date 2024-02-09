@@ -1,7 +1,7 @@
 package com.emerson.sample.news.articles.ui.viewModels
 
 import com.emerson.sample.news.articles.Fixture.articleModel
-import com.emerson.sample.news.articles.domain.repositories.IArticleRepository
+import com.emerson.sample.news.articles.domain.usecases.GetTopHeadlinesCase
 import com.emerson.sample.news.articles.ui.ArticleResult
 import com.emerson.sample.news.articles.viewModels.ArticleListViewModel
 import io.mockk.coEvery
@@ -23,7 +23,7 @@ import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ArticleListViewModelTest {
-    private val articleRepository: IArticleRepository = mockk()
+    private val topHeadlinesCase: GetTopHeadlinesCase = mockk()
 
     private val testDispatcher = UnconfinedTestDispatcher()
 
@@ -45,13 +45,13 @@ class ArticleListViewModelTest {
             val items = listOf(articleModel)
             val results = mutableListOf<ArticleResult>()
 
-            coEvery { articleRepository.getArticles() } coAnswers {
+            coEvery { topHeadlinesCase() } coAnswers {
                 delay(1000)
                 items
             }
 
             articleListViewModel = ArticleListViewModel(
-                articleRepository = articleRepository,
+                topHeadlinesCase = topHeadlinesCase,
                 dispatcher = testDispatcher,
             )
 
@@ -66,7 +66,7 @@ class ArticleListViewModelTest {
             assertTrue(results[0] is ArticleResult.Loading)
             assertTrue(results[1] is ArticleResult.Success)
 
-            coVerify { articleRepository.getArticles() }
+            coVerify { topHeadlinesCase() }
         }
     }
 
@@ -75,13 +75,13 @@ class ArticleListViewModelTest {
         runTest {
             val results = mutableListOf<ArticleResult>()
 
-            coEvery { articleRepository.getArticles() } coAnswers {
+            coEvery { topHeadlinesCase() } coAnswers {
                 delay(1000)
                 throw Exception("An unexpected error occurred")
             }
 
             articleListViewModel = ArticleListViewModel(
-                articleRepository = articleRepository,
+                topHeadlinesCase = topHeadlinesCase,
                 dispatcher = testDispatcher,
             )
 
@@ -96,7 +96,7 @@ class ArticleListViewModelTest {
             assertTrue(results[0] is ArticleResult.Loading)
             assertTrue(results[1] is ArticleResult.Error)
 
-            coVerify { articleRepository.getArticles() }
+            coVerify { topHeadlinesCase() }
 
         }
     }

@@ -32,6 +32,7 @@ class ArticleSourceCloudTest {
             val httpClient = HttpClientProvider(mockEngine)
 
             articleSourceCloud = ArticleSourceCloud(
+                apiKey = "apiKey",
                 clientProvider = httpClient
             )
 
@@ -54,6 +55,7 @@ class ArticleSourceCloudTest {
             val httpClient = HttpClientProvider(mockEngine)
 
             articleSourceCloud = ArticleSourceCloud(
+                apiKey = "apiKey",
                 clientProvider = httpClient
             )
 

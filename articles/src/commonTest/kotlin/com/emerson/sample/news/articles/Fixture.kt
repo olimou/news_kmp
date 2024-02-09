@@ -33,6 +33,8 @@ object Fixture {
         source = sourceModel
     )
 
+    val articleModelList = listOf(articleModel)
+
     val sourcePayload = ArticlesPayload.Article.Source(
         id = sourceId,
         name = sourceName

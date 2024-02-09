@@ -9,7 +9,7 @@ class ArticleRepository(
     private val articleSourceCloud: ArticleSourceCloud,
     private val mapArticlePayload: MapArticlePayload,
 ) : IArticleRepository {
-    override suspend fun getArticles(): List<ArticleModel> {
+    override suspend fun getTopHeadlines(): List<ArticleModel> {
         return articleSourceCloud.getTopHeadlines()
             .articles
             .orEmpty()
