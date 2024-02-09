@@ -28,7 +28,6 @@ class ArticleListViewModel(
     fun loadData() {
         viewModelScope.launch(dispatcher) {
             setLoading()
-            println("ArticleListViewModel - loadData - articleRepository.getArticles()")
             try {
                 val articles = topHeadlinesCase.invoke()
                 setSuccess(articles)
