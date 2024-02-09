@@ -1,7 +1,6 @@
 package com.emerson.sample.news.articles.data.source.cloud
 
 import com.emerson.sample.news.articles.data.payloads.ArticlesPayload
-import com.emerson.sample.news.articles.data.source.cloud.Articles.Companion.API_KEY
 import com.emerson.sample.news.articles.data.source.cloud.Articles.Companion.URL
 import com.emerson.sample.news.core.network.HttpClientProvider
 import io.ktor.client.call.body
@@ -15,7 +14,6 @@ import io.ktor.resources.Resource
 class Articles {
     companion object {
         const val URL = "newsapi.org/v2"
-        const val API_KEY = "c01326036f364ec3946a9e6441cee996"
     }
 
     @Resource("top-headlines")
@@ -26,13 +24,14 @@ class Articles {
 }
 
 class ArticleSourceCloud(
+    private val apiKey: String,
     private val clientProvider: HttpClientProvider,
 ) {
     private val builder: HttpRequestBuilder.() -> Unit = {
         url {
             host = URL
             protocol = URLProtocol.HTTPS
-            parameters.append("apiKey", API_KEY)
+            parameters.append("apiKey", apiKey)
         }
     }
 

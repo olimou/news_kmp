@@ -1,5 +1,6 @@
 package com.emerson.sample.news.data.di
 
+import com.emerson.sample.news.BuildConfig
 import com.emerson.sample.news.articles.data.mappers.MapArticlePayload
 import com.emerson.sample.news.articles.data.mappers.MapSourcePayload
 import com.emerson.sample.news.articles.data.repositories.ArticleRepository
@@ -13,6 +14,7 @@ object DataModule {
         single { HttpClientProvider() }
         single {
             ArticleSourceCloud(
+                apiKey = BuildConfig.NEWS_API_KEY,
                 clientProvider = get(),
             )
         }

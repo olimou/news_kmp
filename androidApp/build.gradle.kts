@@ -55,11 +55,12 @@ android {
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
-        applicationId = "org.example.project"
+        applicationId = "com.emerson.sample.news"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
+        buildConfigField("String", "NEWS_API_KEY", "\"${System.getenv("NEWS_API_KEY")}\"")
     }
     packaging {
         resources {
