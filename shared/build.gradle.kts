@@ -12,7 +12,6 @@ kotlin {
             }
         }
     }
-    
     listOf(
         iosX64(),
         iosArm64(),
@@ -23,19 +22,17 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.serialization.kotlinx.json)
+        }
+        androidMain.dependencies {
         }
     }
 }
 
 android {
-    namespace = "org.example.project.shared"
+    namespace = "com.emerson.sample.news.shared"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
